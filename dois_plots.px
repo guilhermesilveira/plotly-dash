@@ -1,0 +1,18 @@
+app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+
+app.layout = dbc.Container([
+    html.H1('Análise de Doenças Cardíacas', className='text-center mb-5'),
+    dbc.Row([
+        dbc.Col([
+            html.H2('Distribuição de Idade dos Pacientes', className='text-center'),
+            dcc.Graph(id='grafico-histograma-idade', figure=figura_histograma)
+        ], md=6),
+        dbc.Col([
+            html.H2('Idade por Presença de Doença Cardíaca', className='text-center'),
+            dcc.Graph(id='grafico-boxplot-doenca', figure=figura_boxplot)
+        ], md=6),
+    ])
+], fluid=True)
+
+if __name__ == '__main__':
+    app.run_server(debug=True)
