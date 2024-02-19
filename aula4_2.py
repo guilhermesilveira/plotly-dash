@@ -91,14 +91,15 @@ app.layout = html.Div([
         dcc.Input(id='thalach', type='number', placeholder='Frequência Cardíaca Máxima'),
         # label
         html.Label('Angina Induzida por Exercício (1 para sim)'),
-        # checkbox, default value 0
-        dcc.Checklist(
+        # dropbox
+        dcc.Dropdown(
             id='exang',
             options=[
+                {'label': 'Não', 'value': 0},
                 {'label': 'Sim', 'value': 1}
             ],
-            value=[]
         ),
+
         # dcc.Input(id='exang', type='number', placeholder='Angina Induzida por Exercício (1 para sim)'),
         # label
         html.Label('Depressão de ST Induzida por Exercício'),
@@ -119,7 +120,7 @@ app.layout = html.Div([
         html.Label('Número de Vasos Principais Coloridos por Fluoroscopia (0 a 3)'),
         dcc.Input(id='ca', type='number', placeholder='Número de Vasos Principais Coloridos por Fluoroscopia (0 a 3)'),
         # label
-        html.Label('Thalassemia (3 para normal, 6 para defeito fixo, 7 para defeito reversível)'),
+        html.Label('Cintilografia do miocárdio com tálio (3 para normal, 6 para defeito fixo, 7 para defeito reversível)'),
         # combo com padrao o valor vazio
         dcc.Dropdown(
             id='thal',
@@ -129,7 +130,7 @@ app.layout = html.Div([
                 {'label': 'Defeito Reversível', 'value': 7}
             ]
         ),
-        dcc.Input(id='thal', type='number', placeholder='Thalassemia (3 para normal, 6 para defeito fixo, 7 para defeito reversível)'),
+        # dcc.Input(id='thal', type='number', placeholder='Cintilografia do miocárdio (3 para normal, 6 para defeito fixo, 7 para defeito reversível)'),
 
         html.Button('Prever', id='prever', n_clicks=0),
     ]),
@@ -137,6 +138,21 @@ app.layout = html.Div([
 ])
 
 # problema de valor default: a pessoa esquece de alterar!!!!
+
+
+
+# AULA 4.1!!!!
+
+import pandas as pd
+import joblib
+
+
+# Supondo que o modelo já foi carregado anteriormente
+# modelo = joblib.load('modelo_xgboost.pkl')
+
+# Carrega as medianas dos campos
+medianas = joblib.load('medianas.pkl')
+
 
 @app.callback(
     Output('resultado', 'children'),
@@ -155,15 +171,27 @@ app.layout = html.Div([
      State('ca', 'value'),
      State('thal', 'value')]
 )
+
 def prever_doenca_cardiaca(n_clicks, idade, sexo, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal):
     if n_clicks > 0:
+        # Cria um DataFrame com as entradas do usuário
         entradas_usuario = pd.DataFrame(
             data=[[idade, sexo, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal]],
             columns=['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 'thalach', 'exang', 'oldpeak', 'slope', 'ca', 'thal']
         )
+        
+        # Preenche os valores vazios com as medianas
+        entradas_usuario.fillna(medianas, inplace=True)
+        
+        # Faz a predição com os dados do usuário
         predicao = modelo.predict(entradas_usuario)[0]
+        
         return f'O modelo previu que o paciente {"tem" if predicao else "não tem"} doença cardíaca.'
     return 'Informe seus dados e clique em prever para receber a previsão.'
+
+
+
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)

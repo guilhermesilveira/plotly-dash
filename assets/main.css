@@ -2,7 +2,7 @@
 .nav-menu {
     position: fixed;
     left: 0;
-    width: 250px;
+    width: 25px;
     height: 100%;
     background: #f8f8f8;
     border-right: 2px solid #ddd;
@@ -10,6 +10,6 @@
 
 /* Estilos para o conteúdo principal */
 .content {
-    margin-left: 250px; /* mesma largura do menu de navegação */
+    margin-left: 25px; /* mesma largura do menu de navegação */
     padding: 1em;
 }

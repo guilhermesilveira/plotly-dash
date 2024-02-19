@@ -33,7 +33,7 @@ app.layout = html.Div([
         dcc.Link('Modelo', href='/modelo'),
         dcc.Link('Gráficos', href='/graficos')
     ], className="nav-menu"),  # Estilize sua coluna aqui ou use um arquivo CSS
-    html.Div(id='pagina-conteudo')  # Conteúdo que muda dependendo da página selecionada
+    html.Div(id='pagina-conteudo', className="content")  # Conteúdo que muda dependendo da página selecionada
 ])
 
 # Este callback atualiza o conteúdo da página com base na URL

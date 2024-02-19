@@ -1,4 +1,4 @@
-from pages53 import predict, charts
+from pages61 import predict, charts
 
 
 
@@ -16,7 +16,8 @@ import pandas as pd
 
 
 # TODO MUDADO
-app = Dash(__name__, external_stylesheets=['assets/main.css'])
+# app = Dash(__name__, external_stylesheets=['assets/main.css'])
+app = Dash(__name__, external_stylesheets=['assets/main.css',dbc.themes.BOOTSTRAP])
 
 
 # Nesta seção, substitua ou adicione ao código existente da aplicação Dash para incluir o menu lateral
@@ -24,9 +25,9 @@ app.layout = html.Div([
     dcc.Location(id='url', refresh=False),  # Componente para controlar a URL do navegador
     dbc.Container([
     html.Nav([  # Container para o menu lateral
-        dbc.Row([dcc.Link('Home', href='/')]),
-        dbc.Row([dcc.Link('Modelo', href='/modelo')]),
-        dbc.Row([dcc.Link('Gráficos', href='/graficos')])
+        dbc.Row([dbc.Col([dcc.Link('Home', href='/')])]),
+        dbc.Row([dbc.Col([dcc.Link('Modelo', href='/modelo')])]),
+        dbc.Row([dbc.Col([dcc.Link('Gráficos', href='/graficos')])])
     ], className="nav-menu"),  # Estilize sua coluna aqui ou use um arquivo CSS
     ]),
     html.Div(id='pagina-conteudo', className="content")  # Conteúdo que muda dependendo da página selecionada
