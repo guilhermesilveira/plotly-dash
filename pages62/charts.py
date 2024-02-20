@@ -1,3 +1,5 @@
+from app62 import app
+
 from dash import html, dcc
 import plotly.graph_objs as go
 from dash import html, dcc
@@ -46,7 +48,7 @@ figura_boxplot = px.box(dados, x='doenca', y='age', color='doenca',
 layout = dbc.Container([
     html.H1('Análise de Doenças Cardíacas', className='text-center mb-5'),
     dcc.Dropdown(
-        id='cp-dropdown',
+        id='guigo',
         options=[
             {'label': 'Tipo 1', 'value': 1},
             {'label': 'Tipo 2', 'value': 2},
@@ -67,28 +69,17 @@ layout = dbc.Container([
     ])
 ], fluid=True)
 
-    # print(f"Definindo callback")
-    # @app.callback(
-    #     Output('grafico-histograma-idade', 'figure'),
-    #     [Input('cp-dropdown', 'value')]
-    # )
 
-
-def setup_layout(app):
-    # @app.callback(
-    #         Output('tosco', 'children'),
-    #         Input('cp-dropdown', 'value')
-    #     )
-    @app.callback(
-        Output('grafico-histograma-idade', 'figure'),
-        [Input('cp-dropdown', 'value')]
-    )
-    def update_graph(selected_cp):
-        # print("ha")
-        # return html.H1('Análise de Doenças Cardíacas', className='text-center mb-5')
-
-        filtered_df = df[df['cp'] == selected_cp]
-        fig = px.histogram(dados, x='age', title='Distribuição de Idade dos Pacientes')
-        # fig = px.histogram(filtered_df, x='age', title="Distribuição de Idade por Valor de CP")
-        print(f"Figura atualizada para cp = {selected_cp}")
-        return fig
+@app.callback(
+    Output('grafico-histograma-idade', 'figure'),
+    [Input('guigo', 'value')]
+)
+def update_graph(selected_cp):
+    if selected_cp:
+        filtered_df = dados[dados['cp'] == selected_cp]
+    else:
+        filtered_df = dados
+    fig = px.histogram(filtered_df, x='age', title='Distribuição de Idade dos Pacientes')
+    # fig = px.histogram(filtered_df, x='age', title="Distribuição de Idade por Valor de CP")
+    print(f"Figura atualizada para cp = {selected_cp}")
+    return fig

@@ -1,0 +1,6 @@
+runtime: python311
+entrypoint: gunicorn -b :$PORT aula6_2:app
+
+handlers:
+- url: /.*
+  script: auto

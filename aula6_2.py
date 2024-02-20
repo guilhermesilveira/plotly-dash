@@ -1,5 +1,6 @@
-from pages62 import predict, charts
-
+# from pages62 import predict, charts
+import pages62
+from app62 import app
 
 
 
@@ -15,9 +16,6 @@ import joblib
 import pandas as pd
 
 
-# TODO MUDADO
-# app = Dash(__name__, external_stylesheets=['assets/main.css'])
-app = Dash(__name__, external_stylesheets=['assets/main.css',dbc.themes.BOOTSTRAP])
 
 
 # Nesta seção, substitua ou adicione ao código existente da aplicação Dash para incluir o menu lateral
@@ -38,13 +36,11 @@ app.layout = html.Div([
 def mostrar_pagina(pathname):
     if pathname == '/modelo':
         # Substituir este retorno pela página do modelo de doenças cardíacas quando criada
-        return predict.layout
+        return pages62.predict.layout
     elif pathname == '/graficos':
-        return charts.layout
+        return pages62.charts.layout
     else:
         return html.H1('Página Inicial')
-
-charts.setup_layout(app)
 
 # Não se esqueça de iniciar seu servidor
 if __name__ == '__main__':
