@@ -15,6 +15,8 @@ import joblib
 import pandas as pd
 
 
+# MUDAR O NAVBAR COMO NA AULA 7_2b!!!!
+
 # TODO MUDADO
 # app = Dash(__name__, external_stylesheets=['assets/main.css'])
 app = Dash(__name__, external_stylesheets=['assets/main.css',dbc.themes.BOOTSTRAP])

@@ -29,17 +29,22 @@ import pandas as pd
 
 
 
+navbar = dbc.NavbarSimple(
+    children=[
+        dbc.NavItem(dbc.NavLink("Home", href="/")),
+        dbc.NavItem(dbc.NavLink("Modelo", href="/modelo")),
+        dbc.NavItem(dbc.NavLink("Gráficos", href="/graficos")),
+    ],
+    brand="Nosso projeto 2",
+    brand_href="/",
+    color="primary",
+    dark=True,
+)
 
 # Nesta seção, substitua ou adicione ao código existente da aplicação Dash para incluir o menu lateral
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),  # Componente para controlar a URL do navegador
-    dbc.Container([
-    html.Nav([  # Container para o menu lateral
-        dbc.Row([dbc.Col([dcc.Link('Home', href='/')])]),
-        dbc.Row([dbc.Col([dcc.Link('Modelo', href='/modelo')])]),
-        dbc.Row([dbc.Col([dcc.Link('Gráficos', href='/graficos')])])
-    ], className="nav-menu"),  # Estilize sua coluna aqui ou use um arquivo CSS
-    ]),
+    navbar,
     html.Div(id='pagina-conteudo', className="content")  # Conteúdo que muda dependendo da página selecionada
 ])
 
@@ -53,7 +58,7 @@ def mostrar_pagina(pathname):
     elif pathname == '/graficos':
         return pages62.charts.layout
     else:
-        return html.H1('Página Inicial')
+        return html.H1('Bem vindo ao nosso projeto')
 
 if __name__ == '__main__':
     app.run_server(debug=False, host='0.0.0.0', port=8080)
