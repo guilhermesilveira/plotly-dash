@@ -6,6 +6,10 @@
 # gcloud builds submit --tag gcr.io/aulaplotly1meu/heart-disease  --project=aulaplotly1meu
 # gcloud run deploy heart-disease --image gcr.io/aulaplotly1meu/heart-disease --platform managed --project=aulaplotly1meu --allow-unauthenticated
 # região 30
+# gcloud app open-console
+# https://console.cloud.google.com/run/detail/southamerica-east1/hd1/logs?project=aulaplotly1meu
+
+
 
 # from pages62 import predict, charts
 import pages62

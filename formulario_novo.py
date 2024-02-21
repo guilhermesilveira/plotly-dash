@@ -5,6 +5,8 @@ import pandas as pd
 import dash_bootstrap_components as dbc
 import dash
 
+#hd1
+
 # Carrega o modelo treinado
 modelo = joblib.load('modelo_xgboost.pkl')
 
@@ -193,5 +195,5 @@ def prever_doenca_cardiaca(n_clicks, idade, sexo, cp, trestbps, chol, fbs, reste
 
 
 if __name__ == '__main__':
-    #app.run_server(debug=True)
-    app.run_server(debug=True)
+    app.run_server(debug=False, host='0.0.0.0', port=8080)
+    # app.run_server(debug=True)

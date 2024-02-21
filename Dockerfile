@@ -9,12 +9,13 @@ COPY requirements.txt ./
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-COPY assets ./
-COPY pages62 ./
-COPY app62.py ./
-COPY aula7_2.py ./
-COPY *.pkl ./
+COPY . ./
+# COPY assets ./
+# COPY pages62 ./
+# COPY app62.py ./
+# COPY aula7_2.py ./
+# COPY *.pkl ./
 
 EXPOSE 8080 
 
-CMD python aula7_2.py
+CMD python aula7_2b.py
