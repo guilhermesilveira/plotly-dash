@@ -50,10 +50,10 @@ layout = dbc.Container([
     dcc.Dropdown(
         id='guigo',
         options=[
-            {'label': 'Tipo 1', 'value': 1},
-            {'label': 'Tipo 2', 'value': 2},
-            {'label': 'Tipo 3', 'value': 3},
-            {'label': 'Tipo 4', 'value': 4}
+                        {'label': 'Angina típica', 'value': 1},
+                        {'label': 'Angina atípica', 'value': 2},
+                        {'label': 'Não angina', 'value': 3},
+                        {'label': 'Angina assintomática', 'value': 4},
         ],
     ),
     html.Div(id='tosco'),
